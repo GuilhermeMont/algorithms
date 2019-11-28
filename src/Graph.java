@@ -9,12 +9,27 @@ public class Graph {
     private ArrayList<Node> graphs = new ArrayList<>();
 
 
+
+    Graph() {
+        this.graphs = new ArrayList<>();
+    }
+
+
+    Graph(ArrayList<Node> g){
+        this.graphs = g;
+    }
+
+
     public void checkGraph () {
 
         for (Node graph : graphs) {
             System.out.println("Nó " + graph.node + " - " + " Arestas: " + graph.edges);
         }
+    }
 
+
+    public ArrayList<Node> getGraph () {
+        return this.graphs;
     }
 
 
