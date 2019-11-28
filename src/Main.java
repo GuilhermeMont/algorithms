@@ -14,17 +14,17 @@ public class Main {
         }
 
 
-        MaxIndependentSet MSI = new MaxIndependentSet();
+        MaxIndependentSet MIS = new MaxIndependentSet();
 
 
         System.out.println( "Solução gulosa  ");
-        ArrayList<Node> greedySolution = MSI.greedy(graph.getGraph());
+        ArrayList<Node> greedySolution = MIS.greedy(graph.getGraph());
 
         for (Node n : greedySolution) {
             System.out.print( " " + n.node);
         }
 
-        MSI.branchAndBound(greedySolution,graph);
+        MIS.branchAndBound(greedySolution,graph);
 
     }
 }

@@ -52,7 +52,7 @@ public class MaxIndependentSet {
             n.add(node.node);
         }
 
-        for (int i = 0; i < numberOfVariables ; i++) {
+        for (int i = 0; i <= numberOfVariables ; i++) {
             if (n.contains(i)){
                 initialSolution.add(1);
             }else {

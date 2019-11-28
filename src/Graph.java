@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Graph {
 
 
-    private ArrayList<Node> graphs = new ArrayList<>();
+    private ArrayList<Node> graphs;
 
 
 
