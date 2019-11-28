@@ -13,6 +13,8 @@ public class Main {
             e.printStackTrace();
         }
 
+        graph.checkGraph();
+
 
         MaxIndependentSet MIS = new MaxIndependentSet();
 
@@ -24,7 +26,8 @@ public class Main {
             System.out.print( " " + n.node);
         }
 
-        MIS.branchAndBound(greedySolution,graph);
+
+        MIS.branchAndBound(greedySolution);
 
     }
 }

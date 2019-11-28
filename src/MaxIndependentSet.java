@@ -34,8 +34,9 @@ public class MaxIndependentSet {
             independent.add(minNode);
 
             //delete the min node and all its neighbors
-            graph.remove(minNode);
+
             Graph newGraph = new Graph(graph);
+            newGraph.getGraph().remove(minNode);
             graph = removeNeighbors(newGraph.getGraph(),minNode.edges);
 
         }
@@ -64,11 +65,52 @@ public class MaxIndependentSet {
     };
 
 
-    public void branchAndBound (ArrayList<Node> initialSolution , Graph graph) {
+    private boolean checkNode (int nodeNumber, ArrayList<Integer> solution , Graph graph ){
+        for (int i = 0 ; i < solution.size() ; i++){
+            if (solution.get(i) == 1) {
+                System.out.println("EDGES " + graph.getGraph().get(i).edges);
+                System.out.println("NODE NUMBER " + nodeNumber);
+                if (graph.getGraph().get(i).edges.contains(nodeNumber)){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
+    private boolean isValid (ArrayList<Integer> solution , Graph graph) {
+
+        for (int i = 0 ; i < solution.size() ; i++){
+            if (solution.get(i) == 1) {
+                if (!checkNode(i,solution,graph)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+
+    }
+
+
+    public void branchAndBound (ArrayList<Node> initialSolution) {
+
+        Graph graph = new Graph();
+
+        try {
+            graph.loadGraph();
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
 
         ArrayList<Integer> bestSolution = transformToBBSolution(initialSolution,graph.getGraph().size());
 
         System.out.println(bestSolution);
+
+        System.out.print(isValid(bestSolution,graph));
 
     }
 
