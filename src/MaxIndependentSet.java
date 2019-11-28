@@ -24,9 +24,7 @@ public class MaxIndependentSet {
         while (graph.size() != 0) {
 
             Node minNode = graph.get(0);
-
             for (Node node : graph) {
-
                 if (node.edges.size() < minNode.edges.size()) {
                     minNode = node;
                 }
@@ -43,6 +41,35 @@ public class MaxIndependentSet {
         }
 
         return independent;
+    }
+
+
+    private ArrayList<Integer> transformToBBSolution (ArrayList<Node> solution, Integer numberOfVariables){
+        ArrayList<Integer> initialSolution = new ArrayList<>();
+        ArrayList<Integer> n = new ArrayList<>();
+
+        for (Node node : solution){
+            n.add(node.node);
+        }
+
+        for (int i = 0; i < numberOfVariables ; i++) {
+            if (n.contains(i)){
+                initialSolution.add(1);
+            }else {
+                initialSolution.add(0);
+            }
+        }
+
+        return initialSolution;
+    };
+
+
+    public void branchAndBound (ArrayList<Node> initialSolution , Graph graph) {
+
+        ArrayList<Integer> bestSolution = transformToBBSolution(initialSolution,graph.getGraph().size());
+
+        System.out.println(bestSolution);
+
     }
 
 

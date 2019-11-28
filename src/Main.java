@@ -18,11 +18,13 @@ public class Main {
 
 
         System.out.println( "Solução gulosa  ");
+        ArrayList<Node> greedySolution = MSI.greedy(graph.getGraph());
 
-        for (Node n : MSI.greedy(graph.getGraph())) {
+        for (Node n : greedySolution) {
             System.out.print( " " + n.node);
         }
 
+        MSI.branchAndBound(greedySolution,graph);
 
     }
 }
