@@ -13,8 +13,7 @@ public class Main {
             e.printStackTrace();
         }
 
-//        graph.checkGraph();
-
+        graph.checkGraph();
 
         MaxIndependentSet MIS = new MaxIndependentSet();
 

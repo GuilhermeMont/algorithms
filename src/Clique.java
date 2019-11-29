@@ -39,6 +39,7 @@ public class Clique {
         ArrayList<Node> inverseGraph = fillGraph(graph.size());
 //        ArrayList<Node> inverseGraph = new ArrayList<>();
         for (int i =0; i<graph.size();i++){
+            inverseGraph.get(i).edges.remove(i);
             inverseGraph.get(i).edges = removeCommom(inverseGraph.get(i).edges,graph.get(i).edges);
         }
 
