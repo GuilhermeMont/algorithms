@@ -22,5 +22,13 @@ public class Main {
 
         MIS.branchAndBound(greedySolution);
 
+        Clique clique = new Clique();
+
+        ArrayList<Node> cliqueSolution = clique.cliqueByReduction();
+
+        for (Node node : cliqueSolution) {
+            System.out.print(" " + node.node + " ");
+        }
+
     }
 }
