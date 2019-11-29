@@ -52,9 +52,7 @@ public class Graph {
 
 
     //retorna a lista de adjacências do grafo
-    public void loadGraph () throws IOException{
-
-        File file = new File("/Users/gmonteiro/Downloads/algorithms/src/graph.txt");
+    public void loadGraph (File file) throws IOException{
 
         BufferedReader br = null;
 

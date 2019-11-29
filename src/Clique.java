@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.File;
 
 public class Clique {
 
@@ -48,12 +49,12 @@ public class Clique {
 
 
 
-    public ArrayList<Node> cliqueByReduction () {
+    public ArrayList<Node> cliqueByReduction (File graphInstance) {
 
         Graph graph = new Graph();
 
         try {
-            graph.loadGraph();
+            graph.loadGraph(graphInstance);
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,7 +62,9 @@ public class Clique {
 
         Graph inverse = new Graph(inverseGraph(graph.getGraph()));
 
+        System.out.println("Grafo complementar");
         inverse.checkGraph();
+        System.out.println("");
 
         MaxIndependentSet MIS = new MaxIndependentSet();
 

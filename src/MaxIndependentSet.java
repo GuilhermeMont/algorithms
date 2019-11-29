@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.File;
 
 public class MaxIndependentSet {
 
@@ -108,7 +109,7 @@ public class MaxIndependentSet {
 
     private ArrayList<Integer> generateSolution (ArrayList<Integer> solution,Graph graph) {
 
-        System.out.println(solution);
+
         //Tentar inserir mais um vertice no grafo.
         for (int i = 0 ; i < solution.size() ; i++) {
             if (solution.get(i) == 0) {
@@ -145,12 +146,12 @@ public class MaxIndependentSet {
     }
 
 
-    public void branchAndBound (ArrayList<Node> bestGreedySolution) {
+    public void branchAndBound (File graphInstance,ArrayList<Node> bestGreedySolution) {
 
         Graph graph = new Graph();
 
         try {
-            graph.loadGraph();
+            graph.loadGraph(graphInstance);
         }catch (Exception e ){
             e.printStackTrace();
         }
@@ -160,7 +161,9 @@ public class MaxIndependentSet {
 
         ArrayList<Integer> solutionFound = BBoptimization(initialSolution,bestSolution,graph);
 
-        System.out.println("MELHOR SOLUCAO BB " + solutionFound);
+        System.out.println("MELHOR SOLUCAO BB :");
+        System.out.println(solutionFound);
+        System.out.println(" ");
 
 
     }
