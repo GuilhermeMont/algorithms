@@ -13,19 +13,12 @@ public class Main {
             e.printStackTrace();
         }
 
-        graph.checkGraph();
+//        graph.checkGraph();
 
 
         MaxIndependentSet MIS = new MaxIndependentSet();
 
-
-        System.out.println( "Solução gulosa  ");
         ArrayList<Node> greedySolution = MIS.greedy(graph.getGraph());
-
-        for (Node n : greedySolution) {
-            System.out.print( " " + n.node);
-        }
-
 
         MIS.branchAndBound(greedySolution);
 
