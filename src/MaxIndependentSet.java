@@ -124,6 +124,17 @@ public class MaxIndependentSet {
         }
 
         //Tentar trocar algum vertice de posição de forma de que retorne uma solução válida.
+        for (int i = 0 ; i < solution.size() ; i++) {
+            if (solution.get(i) == 1) {
+                solution.set(i,0);
+                if (isValid(solution,graph)){
+                    return solution;
+                }
+                else {
+                    solution.set(i,0);
+                }
+            }
+        }
 
         return null;
     }
