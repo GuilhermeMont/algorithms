@@ -22,7 +22,9 @@ public class Main {
 
             MaxIndependentSet MIS = new MaxIndependentSet();
 
+            System.out.println("Greedy solution");
             ArrayList<Node> greedySolution = MIS.greedy(graph.getGraph());
+            System.out.println(greedySolution);
 
             MIS.branchAndBound(graphInstances[i],greedySolution);
 
@@ -41,9 +43,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        File[] graphInstances = { new File("/Users/gmonteiro/Downloads/algorithms/src/graph.txt"),
-                                  new File("/Users/gmonteiro/Downloads/algorithms/src/graph2.txt"),
-                                  new File("/Users/gmonteiro/Downloads/algorithms/src/graph3.txt") };
+        File[] graphInstances = { new File("graph.txt"),
+                                  new File("graph2.txt"),
+                                  new File("graph3.txt") };
 
 
         generateProblems(graphInstances);
