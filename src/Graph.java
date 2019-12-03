@@ -24,6 +24,7 @@ public class Graph {
 
 
     public void checkGraph () {
+        System.out.println("Nó " + " - " + " Arestas: ");
 
         for (Node graph : graphs) {
             System.out.println("Nó " + graph.node + " - " + " Arestas: " + graph.edges);
@@ -97,7 +98,7 @@ public class Graph {
         int numberOfvars =  Integer.parseInt(br.readLine());
         ArrayList[] positivos = new ArrayList[numberOfvars];
         ArrayList[] negativos = new ArrayList[numberOfvars];
-        ArrayList<Integer> expressao = null;
+        ArrayList<Integer> expressao = new ArrayList<>();
         int i=0;
         while(st != -1) {
             expressao.clear();
@@ -107,33 +108,32 @@ public class Graph {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                System.out.println(st);
                 if (st == 2) {
                     i--;
                 } else if (st == 1) {
-                    Node aux = new Node(i, j);
-                    this.graphs.add(aux);
+                    this.graphs.add(new Node(i, j));
                     expressao.add(i);
                     positivos[j].add(i);
                 } else if (st == 0) {
-                    Node aux = new Node(i, -j);
-                    this.graphs.add(aux);
+                    this.graphs.add(new Node(i, -j));
                     expressao.add(i);
                     negativos[j].add(i);
                 }
-                else{
+                /*else{
                     System.out.println("Entrada de Valor inválida");
                     exit(0);
-                }
+                }*/
                 i++;
             }
-            for(int k = 0; k<expressao.size(); k++){
+            for(int k = 0; k < expressao.size(); k++){
                 int numAux = expressao.get(k);
                 this.graphs.get(numAux).edges=expressao;
                 this.graphs.get(numAux).edges.removeIf(n -> n== numAux);
             }
         }
 
-        for(int a =0; a<this.graphs.size(); a++){
+        /*for(int a =0; a<this.graphs.size(); a++){
             int var = this.graphs.get(a).variavel;
             if(var>0) {
                 this.graphs.get(a).edges.addAll(negativos[var]);
@@ -141,7 +141,8 @@ public class Graph {
             else{
                 this.graphs.get(a).edges.addAll(positivos[-var]);
             }
-        }
+        }*/
+        this.checkGraph();
     }
 }
 

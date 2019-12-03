@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Main {
 
 
-    public static void  generateProblems (File[] graphInstances){
+    public static void  generateProblems (File[] graphInstances, File[] satInstances){
 
         for (int i = 0 ; i < graphInstances.length; i++) {
 
@@ -39,6 +39,15 @@ public class Main {
 
         }
 
+        for(int i = 0; i<satInstances.length; i++) {
+            Graph satGraph = new Graph();
+
+            try {
+                satGraph.loadGraphSat(satInstances[i]);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -47,7 +56,9 @@ public class Main {
                 new File("graph3.txt"),
                 new File("graph2.txt") };
 
-        generateProblems(graphInstances);
+        File[] satInstances = {new File("SatExpression.txt")};
+
+        generateProblems(graphInstances, satInstances);
 
 
 
