@@ -1,7 +1,7 @@
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 
 import static java.lang.System.exit;
 
@@ -85,6 +85,7 @@ public class Graph {
     //Função para transformar Sat em grafo e armazenar o grafo
     public void loadGraphSat (File file) throws IOException{
 
+        Scanner sc = new Scanner(file);
         BufferedReader br = null;
 
         try {
@@ -95,20 +96,29 @@ public class Graph {
 
         int st = -2;
 
-        int numberOfvars =  Integer.parseInt(br.readLine());
-        ArrayList[] positivos = new ArrayList[numberOfvars];
-        ArrayList[] negativos = new ArrayList[numberOfvars];
+        //int numberOfvars =  Integer.parseInt(br.readLine());
+        int numberOfvars = sc.nextInt();
+        System.out.println(numberOfvars);
+        ArrayList [] positivos = new ArrayList[numberOfvars];
+        ArrayList [] negativos = new ArrayList[numberOfvars];
+        for(int i =0; i<numberOfvars; i++){
+            positivos[i] = new ArrayList();
+        }
+        for(int i =0; i<numberOfvars; i++){
+            negativos[i] = new ArrayList();
+        }
         ArrayList<Integer> expressao = new ArrayList<>();
         int i=0;
-        while(st != -1) {
+        while(sc.hasNextLine()) {
             expressao.clear();
             for(int j=1; j<=numberOfvars; j++) {
-                try {
-                    if (((st = br.read()) == -1)) break;
+                /*try {
+                    if ((() == -1)) break;
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-                System.out.println(st);
+                }*/
+                st = sc.nextInt();
+                System.out.print(st+" ");
                 if (st == 2) {
                     i--;
                 } else if (st == 1) {
@@ -126,6 +136,7 @@ public class Graph {
                 }*/
                 i++;
             }
+            System.out.println("");
             for(int k = 0; k < expressao.size(); k++){
                 int numAux = expressao.get(k);
                 this.graphs.get(numAux).edges=expressao;
