@@ -3,6 +3,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.exit;
+
 
 public class Graph {
 
@@ -91,7 +93,10 @@ public class Graph {
         }
 
         int st = -2;
+
         int numberOfvars =  Integer.parseInt(br.readLine());
+        ArrayList[] positivos = new ArrayList[numberOfvars];
+        ArrayList[] negativos = new ArrayList[numberOfvars];
         ArrayList<Integer> expressao = null;
         int i=0;
         while(st != -1) {
@@ -108,10 +113,16 @@ public class Graph {
                     Node aux = new Node(i, j);
                     this.graphs.add(aux);
                     expressao.add(i);
+                    positivos[j].add(i);
                 } else if (st == 0) {
                     Node aux = new Node(i, -j);
                     this.graphs.add(aux);
                     expressao.add(i);
+                    negativos[j].add(i);
+                }
+                else{
+                    System.out.println("Entrada de Valor inválida");
+                    exit(0);
                 }
                 i++;
             }
@@ -119,6 +130,16 @@ public class Graph {
                 int numAux = expressao.get(k);
                 this.graphs.get(numAux).edges=expressao;
                 this.graphs.get(numAux).edges.removeIf(n -> n== numAux);
+            }
+        }
+
+        for(int a =0; a<this.graphs.size(); a++){
+            int var = this.graphs.get(a).variavel;
+            if(var>0) {
+                this.graphs.get(a).edges.addAll(negativos[var]);
+            }
+            else{
+                this.graphs.get(a).edges.addAll(positivos[-var]);
             }
         }
     }
