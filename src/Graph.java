@@ -99,13 +99,13 @@ public class Graph {
         //int numberOfvars =  Integer.parseInt(br.readLine());
         int numberOfvars = sc.nextInt();
         System.out.println(numberOfvars);
-        ArrayList [] positivos = new ArrayList[numberOfvars];
-        ArrayList [] negativos = new ArrayList[numberOfvars];
+        ArrayList<Integer> [] positivos = new ArrayList[numberOfvars];
+        ArrayList<Integer> [] negativos = new ArrayList[numberOfvars];
         for(int i =0; i<numberOfvars; i++){
-            positivos[i] = new ArrayList();
+            positivos[i] = new ArrayList<Integer>();
         }
         for(int i =0; i<numberOfvars; i++){
-            negativos[i] = new ArrayList();
+            negativos[i] = new ArrayList<Integer>();
         }
         ArrayList<Integer> expressao = new ArrayList<>();
         int i=0;
@@ -124,11 +124,11 @@ public class Graph {
                 } else if (st == 1) {
                     this.graphs.add(new Node(i, j));
                     expressao.add(i);
-                    positivos[j].add(i);
+                    positivos[j-1].add(i);
                 } else if (st == 0) {
                     this.graphs.add(new Node(i, -j));
                     expressao.add(i);
-                    negativos[j].add(i);
+                    negativos[j-1].add(i);
                 }
                 /*else{
                     System.out.println("Entrada de Valor inválida");
