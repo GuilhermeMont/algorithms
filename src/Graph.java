@@ -1,6 +1,9 @@
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.*;
+
+
+import static java.lang.System.exit;
 
 
 public class Graph {
@@ -21,6 +24,7 @@ public class Graph {
 
 
     public void checkGraph () {
+        System.out.println("Nó " + " - " + " Arestas: ");
 
         for (Node graph : graphs) {
             System.out.println("Nó " + graph.node + " - " + " Arestas: " + graph.edges);
@@ -76,6 +80,80 @@ public class Graph {
             this.graphs.add(new Node(i,checkAdjacencies(st)));
 
         }
+    }
+
+    //Função para transformar Sat em grafo e armazenar o grafo
+    public void loadGraphSat (File file) throws IOException{
+
+        Scanner sc = new Scanner(file);
+        BufferedReader br = null;
+
+        try {
+            br = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        int st = -2;
+
+        //int numberOfvars =  Integer.parseInt(br.readLine());
+        int numberOfvars = sc.nextInt();
+        System.out.println(numberOfvars);
+        ArrayList [] positivos = new ArrayList[numberOfvars];
+        ArrayList [] negativos = new ArrayList[numberOfvars];
+        for(int i =0; i<numberOfvars; i++){
+            positivos[i] = new ArrayList();
+        }
+        for(int i =0; i<numberOfvars; i++){
+            negativos[i] = new ArrayList();
+        }
+        ArrayList<Integer> expressao = new ArrayList<>();
+        int i=0;
+        while(sc.hasNextLine()) {
+            expressao.clear();
+            for(int j=1; j<=numberOfvars; j++) {
+                /*try {
+                    if ((() == -1)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+                st = sc.nextInt();
+                System.out.print(st+" ");
+                if (st == 2) {
+                    i--;
+                } else if (st == 1) {
+                    this.graphs.add(new Node(i, j));
+                    expressao.add(i);
+                    positivos[j].add(i);
+                } else if (st == 0) {
+                    this.graphs.add(new Node(i, -j));
+                    expressao.add(i);
+                    negativos[j].add(i);
+                }
+                /*else{
+                    System.out.println("Entrada de Valor inválida");
+                    exit(0);
+                }*/
+                i++;
+            }
+            System.out.println("");
+            for(int k = 0; k < expressao.size(); k++){
+                int numAux = expressao.get(k);
+                this.graphs.get(numAux).edges=expressao;
+                this.graphs.get(numAux).edges.removeIf(n -> n== numAux);
+            }
+        }
+
+        /*for(int a =0; a<this.graphs.size(); a++){
+            int var = this.graphs.get(a).variavel;
+            if(var>0) {
+                this.graphs.get(a).edges.addAll(negativos[var]);
+            }
+            else{
+                this.graphs.get(a).edges.addAll(positivos[-var]);
+            }
+        }*/
+        this.checkGraph();
     }
 }
 

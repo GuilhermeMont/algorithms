@@ -5,7 +5,8 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
 
-    private static void  generateProblems (File[] graphInstances){
+
+    private static void  generateProblems (File[] graphInstances, File[] satInstances){
 
         for (int i = 0 ; i < graphInstances.length; i++) {
 
@@ -79,6 +80,15 @@ public class Main {
 
         }
 
+        for(int i = 0; i<satInstances.length; i++) {
+            Graph satGraph = new Graph();
+
+            try {
+                satGraph.loadGraphSat(satInstances[i]);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -103,7 +113,10 @@ public class Main {
 
         };
 
-        generateProblems(graphInstances);
+        File[] satInstances = {new File("SatExpression.txt")};
+
+        generateProblems(graphInstances, satInstances);
+
 
 
     }
