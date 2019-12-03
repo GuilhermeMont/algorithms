@@ -5,12 +5,11 @@ import java.util.Arrays;
 public class MaxIndependentSet {
 
 
-
-    private ArrayList<Node> removeNeighbors (ArrayList<Node> nodes,ArrayList<Integer> edges)  {
+    private ArrayList<Node> removeNeighbors(ArrayList<Node> nodes, ArrayList<Integer> edges) {
         ArrayList<Node> n = new ArrayList<>();
 
-        for (Node node : nodes){
-            if (!edges.contains(node.node)){
+        for (Node node : nodes) {
+            if (!edges.contains(node.node)) {
                 n.add(node);
             }
         }
@@ -19,7 +18,7 @@ public class MaxIndependentSet {
     }
 
 
-    public ArrayList<Node> greedy (ArrayList<Node> graph) {
+    public ArrayList<Node> greedy(ArrayList<Node> graph) {
 
         ArrayList<Node> independent = new ArrayList<>();
 
@@ -39,7 +38,7 @@ public class MaxIndependentSet {
 
             Graph newGraph = new Graph(graph);
             newGraph.getGraph().remove(minNode);
-            graph = removeNeighbors(newGraph.getGraph(),minNode.edges);
+            graph = removeNeighbors(newGraph.getGraph(), minNode.edges);
 
         }
 
@@ -47,31 +46,33 @@ public class MaxIndependentSet {
     }
 
 
-    private ArrayList<Integer> transformToBBSolution (ArrayList<Node> solution, Integer numberOfVariables){
+    private ArrayList<Integer> transformToBBSolution(ArrayList<Node> solution, Integer numberOfVariables) {
         ArrayList<Integer> initialSolution = new ArrayList<>();
         ArrayList<Integer> n = new ArrayList<>();
 
-        for (Node node : solution){
+        for (Node node : solution) {
             n.add(node.node);
         }
 
-        for (int i = 0; i < numberOfVariables ; i++) {
-            if (n.contains(i)){
+        for (int i = 0; i < numberOfVariables; i++) {
+            if (n.contains(i)) {
                 initialSolution.add(1);
-            }else {
+            } else {
                 initialSolution.add(0);
             }
         }
 
         return initialSolution;
-    };
+    }
+
+    ;
 
 
-    private boolean checkNode (int nodeNumber, ArrayList<Integer> solution , Graph graph ){
+    private boolean checkNode(int nodeNumber, ArrayList<Integer> solution, Graph graph) {
 
-        for (int i = 0 ; i < solution.size() ; i++){
+        for (int i = 0; i < solution.size(); i++) {
             if (solution.get(i) == 1) {
-                if (graph.getGraph().get(i).edges.contains(nodeNumber)){
+                if (graph.getGraph().get(i).edges.contains(nodeNumber)) {
                     return false;
                 }
             }
@@ -81,11 +82,11 @@ public class MaxIndependentSet {
     }
 
 
-    private boolean isValid (ArrayList<Integer> solution , Graph graph) {
+    private boolean isValid(ArrayList<Integer> solution, Graph graph) {
 
-        for (int i = 0 ; i < solution.size() ; i++){
+        for (int i = 0; i < solution.size(); i++) {
             if (solution.get(i) == 1) {
-                if (!checkNode(i,solution,graph)) {
+                if (!checkNode(i, solution, graph)) {
                     return false;
                 }
             }
@@ -95,11 +96,11 @@ public class MaxIndependentSet {
 
     }
 
-    private boolean isGoodSolution (ArrayList<Integer> solution, ArrayList<Integer> bestSolution) {
+    private boolean isGoodSolution(ArrayList<Integer> solution, ArrayList<Integer> bestSolution) {
         int solutionScore = 0;
         int bestSolutionScore = 0;
 
-        for (int i = 0 ; i< bestSolution.size() ; i++) {
+        for (int i = 0; i < bestSolution.size(); i++) {
             solutionScore += solution.get(i) == 1 ? 1 : 0;
             bestSolutionScore += bestSolution.get(i) == 1 ? 1 : 0;
         }
@@ -108,100 +109,104 @@ public class MaxIndependentSet {
     }
 
 
-    private ArrayList<Integer> generateSolution (ArrayList<Integer> solution,Graph graph) {
+    private int generateSolution(ArrayList<Integer> solution, int pos, Graph graph) {
 
-        System.out.println("------------");
 
+        int score = 0;
+        solution.set(pos, 1);
         //Tentar inserir mais um vertice no grafo.
-        for (int i = 0 ; i < solution.size() ; i++) {
-            System.out.println(solution);
+        for (int i = 0; i < solution.size(); i++) {
             if (solution.get(i) == 0) {
-                solution.set(i,1);
-                if (isValid(solution,graph)){
-                    return solution;
+                solution.set(i, 1);
+                if (isValid(solution, graph)) {
+                    score++;
                 }
-                else {
-                    solution.set(i,0);
-                }
+                solution.set(i, 0);
             }
-        }
-
-        //Tentar trocar algum vertice de posição de forma de que retorne uma solução válida.
-        for (int i = 0 ; i < solution.size() ; i++) {
-            System.out.println(solution);
             if (solution.get(i) == 1) {
-                solution.set(i,0);
-                if (isValid(solution,graph)){
-                    return solution;
-                }
-                else {
-                    solution.set(i,0);
-                }
+                score++;
             }
         }
 
-        return new ArrayList<>();
+        return score;
     }
 
 
-    private ArrayList<Integer> BBoptimization (ArrayList<Integer> solution,ArrayList<Integer> bestSolution
-            ,ArrayList<ArrayList<Integer>> solutions,Graph graph) {
+    private ArrayList<Integer> BBoptimization(ArrayList<Integer> solution, ArrayList<Integer> bestSolution
+            , ArrayList<Integer> pos, Graph graph) {
 
-        if (isGoodSolution(solution,bestSolution) && isValid(solution,graph)) {
+        if (isGoodSolution(solution, bestSolution) && isValid(solution, graph)) {
             return solution;
-        }
-        else{
-            ArrayList<Integer> possibleSolution = generateSolution(solution,graph);
-            if (possibleSolution.size() == 0) {
-                return bestSolution;
-            }
-            else {
-                if (!solutions.contains(possibleSolution)){
-                    solutions.add(possibleSolution);
+        } else {
+            int maxScore = 0;
+            int localPos = 0;
+            for (int i = 0; i < graph.getGraph().size(); i++) {
+                if (!pos.contains(i)) {
+                    int score = generateSolution(solution, i, graph);
+                    if (score > maxScore) {
+                        {
+                            solution.set(i, 1);
+                            if (isValid(solution, graph)) {
+                                maxScore = score;
+                                localPos = i;
+                            } else {
+                                solution.set(i, 0);
+                            }
+                        }
+
+                    }
                 }
-                BBoptimization(possibleSolution,bestSolution,solutions,graph);
-
             }
 
-            System.out.println("CAMOM !!");
 
-            return possibleSolution;
+            if (pos.size() == graph.getGraph().size()){
+                return solution;
+            }
+
+
+            pos.add(localPos);
+            solution.set(localPos, 1);
+
+            BBoptimization(solution, bestSolution, pos, graph);
+
+
         }
 
+        return solution;
     }
 
 
-    private ArrayList<Integer> fillInitialSolution (int graphSize) {
+    private ArrayList<Integer> fillInitialSolution(int graphSize) {
         ArrayList<Integer> is = new ArrayList<>();
-        for (int i = 0; i< graphSize; i++){
+        for (int i = 0; i < graphSize; i++) {
             is.add(0);
         }
         return is;
     }
 
 
-    public void branchAndBound (File graphInstance,ArrayList<Node> bestGreedySolution) {
+    public void branchAndBound(File graphInstance, ArrayList<Node> bestGreedySolution) {
 
         Graph graph = new Graph();
 
         try {
             graph.loadGraph(graphInstance);
-        }catch (Exception e ){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        ArrayList<Integer> bestSolution = transformToBBSolution(bestGreedySolution,graph.getGraph().size());
+        ArrayList<Integer> bestSolution = transformToBBSolution(bestGreedySolution, graph.getGraph().size());
         ArrayList<Integer> initialSolution = fillInitialSolution(graph.getGraph().size());
-        ArrayList<ArrayList<Integer>> solutions = new ArrayList<>();
-        ArrayList<Integer> solutionFound = BBoptimization(initialSolution,bestSolution,solutions,graph);
 
+        ArrayList<Integer> solutionFound = BBoptimization(initialSolution, bestSolution, new ArrayList<>(), graph);
+
+        System.out.println(" ");
         System.out.println("MELHOR SOLUCAO BB :");
         System.out.println(solutionFound);
         System.out.println(" ");
 
 
     }
-
 
 
 }

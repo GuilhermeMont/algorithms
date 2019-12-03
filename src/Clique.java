@@ -62,10 +62,6 @@ public class Clique {
 
         Graph inverse = new Graph(inverseGraph(graph.getGraph()));
 
-        System.out.println("Grafo complementar");
-        inverse.checkGraph();
-        System.out.println("");
-
         MaxIndependentSet MIS = new MaxIndependentSet();
 
         return MIS.greedy(inverse.getGraph());

@@ -16,15 +16,14 @@ public class Main {
                 e.printStackTrace();
             }
 
-            System.out.println("Instância " + i + "  - Grafo");
-            graph.checkGraph();
-            System.out.println(" ");
-
             MaxIndependentSet MIS = new MaxIndependentSet();
 
             System.out.println("Greedy solution");
             ArrayList<Node> greedySolution = MIS.greedy(graph.getGraph());
-            System.out.println(greedySolution);
+            for (Node n : greedySolution){
+                System.out.print(" " + n.node + ", ");
+            }
+
 
             MIS.branchAndBound(graphInstances[i],greedySolution);
 
@@ -36,6 +35,7 @@ public class Main {
             for (Node node : cliqueSolution) {
                 System.out.print(" " + node.node + " ");
             }
+            System.out.println(" ");
 
         }
 
@@ -44,9 +44,8 @@ public class Main {
     public static void main(String[] args) {
 
         File[] graphInstances = { new File("graph.txt"),
-                                  new File("graph2.txt"),
-                                  new File("graph3.txt") };
-
+                new File("graph3.txt"),
+                new File("graph2.txt") };
 
         generateProblems(graphInstances);
 
