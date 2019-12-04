@@ -98,15 +98,15 @@ public class Main {
             System.out.println("Execution time of SAT in milliseconds : " +
                     timeElapsed / 100000);
 
-            //MaxIndependentSet MISsat = new MaxIndependentSet();
+            MaxIndependentSet MISsat = new MaxIndependentSet();
 
-            //ArrayList<Node> greedySolution = MISsat.greedy(satGraph.getGraph());
+            ArrayList<Node> greedySolution = MISsat.greedy(satGraph.getGraph());
 
             /*for(int j = 0; j < greedySolution.size(); j++){
                 System.out.println(greedySolution.get(j).);
             }*/
 
-            //MISsat.branchAndBound(satInstances[i],greedySolution);
+            MISsat.branchAndBound(satInstances[i],greedySolution);
 
             /*System.out.println("SOLUCAO");
             for (Node n : greedySolution){
@@ -119,7 +119,7 @@ public class Main {
 
         File[] graphInstances = {
 
-                /*new File("graph100.txt"),
+                new File("graph100.txt"),
                 new File("graph100-1.txt"),
                 new File("graph100-2.txt"),
                 new File("graph200.txt"),
@@ -133,13 +133,13 @@ public class Main {
                 new File("graph400-2.txt"),
                 new File("graph500.txt"),
                 new File("graph500-1.txt"),
-                new File("graph500-2.txt"),*/
+                new File("graph500-2.txt"),
 
         };
 
-        File[] satInstances = {/*new File("SatExpression.txt"),*/
+        File[] satInstances = {new File("SatExpression.txt"),
                 new File("SatExpression4.txt")
-                /*,new File("SatExpression3.txt")*/};
+                ,new File("SatExpression3.txt")};
 
         generateProblems(graphInstances, satInstances);
 
