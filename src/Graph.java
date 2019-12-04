@@ -107,7 +107,7 @@ public class Graph {
         for(int i =0; i<numberOfvars; i++){
             negativos[i] = new ArrayList<Integer>();
         }
-        ArrayList<Integer> expressao = new ArrayList<>();
+        ArrayList<Integer> expressao = new ArrayList<Integer>();
         int i=0;
         while(sc.hasNextLine()) {
             expressao.clear();
@@ -118,7 +118,7 @@ public class Graph {
                     e.printStackTrace();
                 }*/
                 st = sc.nextInt();
-                System.out.print(st+" ");
+                //System.out.print(st+" ");
                 if (st == 2) {
                     i--;
                 } else if (st == 1) {
@@ -136,23 +136,24 @@ public class Graph {
                 }*/
                 i++;
             }
-            System.out.println("");
+            //System.out.println("");
             for(int k = 0; k < expressao.size(); k++){
                 int numAux = expressao.get(k);
-                this.graphs.get(numAux).edges=expressao;
-                this.graphs.get(numAux).edges.removeIf(n -> n== numAux);
+                //ArrayList<Integer> a = expressao;
+                this.graphs.get(numAux).edges = new ArrayList<Integer>(expressao);
+                this.graphs.get(numAux).edges.removeIf(n -> (n == numAux));
             }
         }
 
-        /*for(int a =0; a<this.graphs.size(); a++){
+        for(int a =0; a<this.graphs.size(); a++){
             int var = this.graphs.get(a).variavel;
             if(var>0) {
-                this.graphs.get(a).edges.addAll(negativos[var]);
+                this.graphs.get(a).edges.addAll(negativos[var-1]);
             }
             else{
-                this.graphs.get(a).edges.addAll(positivos[-var]);
+                this.graphs.get(a).edges.addAll(positivos[-var-1]);
             }
-        }*/
+        }
         this.checkGraph();
     }
 }

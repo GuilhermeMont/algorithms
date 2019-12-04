@@ -95,7 +95,7 @@ public class Main {
 
         File[] graphInstances = {
 
-                new File("graph100.txt"),
+                /*new File("graph100.txt"),
                 new File("graph100-1.txt"),
                 new File("graph100-2.txt"),
                 new File("graph200.txt"),
@@ -109,7 +109,7 @@ public class Main {
                 new File("graph400-2.txt"),
                 new File("graph500.txt"),
                 new File("graph500-1.txt"),
-                new File("graph500-2.txt"),
+                new File("graph500-2.txt"),*/
 
         };
 
