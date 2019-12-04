@@ -96,7 +96,6 @@ public class Graph {
 
         int st = -2;
 
-        //int numberOfvars =  Integer.parseInt(br.readLine());
         int numberOfvars = sc.nextInt();
         System.out.println(numberOfvars);
         ArrayList<Integer> [] positivos = new ArrayList[numberOfvars];
@@ -112,13 +111,9 @@ public class Graph {
         while(sc.hasNextLine()) {
             expressao.clear();
             for(int j=1; j<=numberOfvars; j++) {
-                /*try {
-                    if ((() == -1)) break;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
+
                 st = sc.nextInt();
-                //System.out.print(st+" ");
+
                 if (st == 2) {
                     i--;
                 } else if (st == 1) {
@@ -130,10 +125,10 @@ public class Graph {
                     expressao.add(i);
                     negativos[j-1].add(i);
                 }
-                /*else{
+                else{
                     System.out.println("Entrada de Valor inválida");
                     exit(0);
-                }*/
+                }
                 i++;
             }
             //System.out.println("");

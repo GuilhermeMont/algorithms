@@ -88,6 +88,21 @@ public class Main {
             }catch (Exception e){
                 e.printStackTrace();
             }
+
+            MaxIndependentSet MISsat = new MaxIndependentSet();
+
+            ArrayList<Node> greedySolution = MISsat.greedy(satGraph.getGraph());
+
+            /*for(int j = 0; j < greedySolution.size(); j++){
+                System.out.println(greedySolution.get(j).);
+            }*/
+
+            MISsat.branchAndBound(satInstances[i],greedySolution);
+
+            System.out.println("SOLUCAO");
+            for (Node n : greedySolution){
+                System.out.print(" " + n.node + ", ");
+            }
         }
     }
 
