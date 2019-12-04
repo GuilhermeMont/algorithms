@@ -200,10 +200,10 @@ public class MaxIndependentSet {
 
         ArrayList<Integer> solutionFound = BBoptimization(initialSolution, bestSolution, new ArrayList<>(), graph);
 
-        System.out.println(" ");
+        /*System.out.println(" ");
         System.out.println("MELHOR SOLUCAO BB :");
         System.out.println(solutionFound);
-        System.out.println(" ");
+        System.out.println(" ");*/
 
 
     }

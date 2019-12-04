@@ -83,26 +83,35 @@ public class Main {
         for(int i = 0; i<satInstances.length; i++) {
             Graph satGraph = new Graph();
 
+            long startTime = System.nanoTime();
             try {
                 satGraph.loadGraphSat(satInstances[i]);
             }catch (Exception e){
                 e.printStackTrace();
             }
 
-            MaxIndependentSet MISsat = new MaxIndependentSet();
+            long endTime = System.nanoTime();
 
-            ArrayList<Node> greedySolution = MISsat.greedy(satGraph.getGraph());
+            // get difference of two nanoTime values
+            long timeElapsed = endTime - startTime;
+
+            System.out.println("Execution time of SAT in milliseconds : " +
+                    timeElapsed / 100000);
+
+            //MaxIndependentSet MISsat = new MaxIndependentSet();
+
+            //ArrayList<Node> greedySolution = MISsat.greedy(satGraph.getGraph());
 
             /*for(int j = 0; j < greedySolution.size(); j++){
                 System.out.println(greedySolution.get(j).);
             }*/
 
-            MISsat.branchAndBound(satInstances[i],greedySolution);
+            //MISsat.branchAndBound(satInstances[i],greedySolution);
 
-            System.out.println("SOLUCAO");
+            /*System.out.println("SOLUCAO");
             for (Node n : greedySolution){
                 System.out.print(" " + n.node + ", ");
-            }
+            }*/
         }
     }
 
@@ -128,7 +137,9 @@ public class Main {
 
         };
 
-        File[] satInstances = {new File("SatExpression.txt")};
+        File[] satInstances = {/*new File("SatExpression.txt"),*/
+                new File("SatExpression4.txt")
+                /*,new File("SatExpression3.txt")*/};
 
         generateProblems(graphInstances, satInstances);
 
